@@ -8,28 +8,26 @@ def extract_parallel_examples(item, page, logger):
     if not example_block:
         return results
 
-    p_tags = example_block.find_all("p")
+    # Obtener texto respetando saltos
+    raw_text = example_block.get_text(separator="\n")
+    lines = [clean_text(l) for l in raw_text.split("\n") if clean_text(l)]
 
-    if len(p_tags) >= 2:
-        yine = clean_text(p_tags[0].get_text())
-        spa = clean_text(p_tags[1].get_text())
-
-    elif len(p_tags) == 1 and "<br" in str(p_tags[0]):
-        parts = [clean_text(x) for x in p_tags[0].decode_contents().split("<br")]
-
-        if len(parts) >= 2:
-            yine, spa = parts[0], parts[1]
-        else:
-            return results
-    else:
+    # Esperamos al menos dos líneas: YINE / ESPAÑOL
+    if len(lines) < 2:
         return results
 
-    if yine and spa:
-        results.append({
-            "source": "diccionario_virtual_yine",
-            "yine": yine,
-            "spanish": spa,
-            "page": page
-        })
+    yine = lines[0]
+    spa = lines[1]
+
+    # Filtro de seguridad adicional
+    if len(yine) < 2 or len(spa) < 2:
+        return results
+
+    results.append({
+        "source": "diccionario_virtual_yine",
+        "yine": yine,
+        "spanish": spa,
+        "page": page
+    })
 
     return results
