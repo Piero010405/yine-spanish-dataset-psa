@@ -7,6 +7,10 @@ from scraper_bible.processor import save_verses
 from scraper_bible.dataset_builder import build_dataset
 from lib.books_dict import BOOKS
 from config.settings import TIMEOUT
+from config.constants import (
+    IDIOMA_BASE,
+    IDIOMA_OBJETIVO
+)
 
 def main():
     """
@@ -20,7 +24,7 @@ def main():
             chapters = range(1, chapters + 1)
 
         for ch in chapters:
-            for lang in ["awajun", "spanish"]:
+            for lang in [IDIOMA_BASE, IDIOMA_OBJETIVO]:
                 url = build_url(lang, book, ch)
                 print(f"Descargando {book} {ch} ({lang}) → {url}")
 
