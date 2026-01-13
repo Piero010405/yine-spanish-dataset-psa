@@ -1,3 +1,6 @@
+"""
+Configuration settings for the scraper.
+"""
 REQUEST_HEADERS = {
     "User-Agent": "YineDatasetScraper/1.0 (academic use)"
 }

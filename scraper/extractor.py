@@ -1,7 +1,13 @@
+"""
+Extractor module for scraping parallel YINE-Spanish examples.
+"""
 from config.constants import EXAMPLE_SELECTOR
 from scraper.normalizer import clean_text
 
 def extract_parallel_examples(item, page, logger):
+    """
+    Extract parallel YINE-Spanish examples from a dictionary item.
+    """
     results = []
 
     example_block = item.select_one(EXAMPLE_SELECTOR)

@@ -1,3 +1,7 @@
+"""
+Configuration constants for the Yine-Spanish dictionary scraper.
+"""
+
 BASE_URL = "http://diccionariovirtualyine.culturacusco.gob.pe"
 LIST_ENDPOINT = "/palabra-yine-all"
 

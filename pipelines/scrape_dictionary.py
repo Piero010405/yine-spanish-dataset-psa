@@ -1,3 +1,7 @@
+"""
+Scrape dictionary entries and extract parallel sentences.
+"""
+
 from tqdm import tqdm
 from scraper.fetcher import fetch_html
 from scraper.paginator import build_page_url
@@ -8,6 +12,9 @@ from utils.io import save_csv
 from config.constants import MAX_PAGE, PROCESSED_DIR
 
 def main():
+    """
+    Main function to scrape dictionary entries and save parallel sentences.
+    """
     logger = setup_logger()
     parallel_sentences = []
 
@@ -16,7 +23,7 @@ def main():
         html = fetch_html(url, logger)
 
         if not html:
-            logger.error(f"Failed page {page}")
+            logger.error("Failed page %s", page)
             continue
 
         items = parse_items(html)
@@ -31,7 +38,7 @@ def main():
         fieldnames=["source", "yine", "spanish", "page"]
     )
 
-    logger.info(f"Total parallel pairs: {len(parallel_sentences)}")
+    logger.info("Total parallel pairs: %s", len(parallel_sentences))
 
 if __name__ == "__main__":
     main()
