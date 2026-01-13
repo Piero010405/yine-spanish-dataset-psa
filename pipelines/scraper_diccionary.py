@@ -3,10 +3,10 @@ Scrape dictionary entries and extract parallel sentences.
 """
 
 from tqdm import tqdm
-from scraper.fetcher import fetch_html
-from scraper.paginator import build_page_url
-from scraper.parser import parse_items
-from scraper.extractor import extract_parallel_examples
+from scraper_diccionary.fetcher import fetch_html
+from scraper_diccionary.paginator import build_page_url
+from scraper_diccionary.parser import parse_items
+from scraper_diccionary.extractor import extract_parallel_examples
 from utils.logger import setup_logger
 from utils.io import save_csv
 from config.constants import MAX_PAGE, PROCESSED_DIR

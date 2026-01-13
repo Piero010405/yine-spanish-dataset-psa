@@ -2,7 +2,7 @@
 Extractor module for scraping parallel YINE-Spanish examples.
 """
 from config.constants import EXAMPLE_SELECTOR
-from scraper.normalizer import clean_text
+from scraper_diccionary.normalizer import clean_text
 
 def extract_parallel_examples(item, page, logger):
     """
