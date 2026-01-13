@@ -9,7 +9,12 @@ from scraper_diccionary.parser import parse_items
 from scraper_diccionary.extractor import extract_parallel_examples
 from utils.logger import setup_logger
 from utils.io import save_csv
-from config.constants import MAX_PAGE, PROCESSED_DIR
+from config.constants import (
+    MAX_PAGE,
+    PROCESSED_DIR,
+    IDIOMA_BASE,
+    IDIOMA_OBJETIVO
+)
 
 def main():
     """
@@ -35,7 +40,7 @@ def main():
     save_csv(
         f"{PROCESSED_DIR}/parallel_sentences.csv",
         parallel_sentences,
-        fieldnames=["source", "yine", "spanish", "page"]
+        fieldnames=["source", IDIOMA_BASE, IDIOMA_OBJETIVO, "page"]
     )
 
     logger.info("Total parallel pairs: %s", len(parallel_sentences))

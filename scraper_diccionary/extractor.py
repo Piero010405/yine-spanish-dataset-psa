@@ -1,8 +1,12 @@
 """
 Extractor module for scraping parallel YINE-Spanish examples.
 """
-from config.constants import EXAMPLE_SELECTOR
 from scraper_diccionary.normalizer import clean_text
+from config.constants import (
+    IDIOMA_BASE,
+    IDIOMA_OBJETIVO,
+    EXAMPLE_SELECTOR
+)
 
 def extract_parallel_examples(item, page, logger):
     """
@@ -31,8 +35,8 @@ def extract_parallel_examples(item, page, logger):
 
     results.append({
         "source": "diccionario_virtual_yine",
-        "yine": yine,
-        "spanish": spa,
+        IDIOMA_BASE: yine,
+        IDIOMA_OBJETIVO: spa,
         "page": page
     })
 

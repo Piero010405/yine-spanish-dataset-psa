@@ -15,8 +15,8 @@ ITEM_SELECTOR = "div.li-filas-data.col-md-12"
 EXAMPLE_SELECTOR = "div.views-field-field-ejemplos-palabra em.field-content"
 
 # * Constants for ebible.org/ Web Scraper
-BASE_URL_AWAJUN = "https://ebible.org/pibNT/"
-BASE_URL_SPANISH = "https://ebible.org/spabes/"
+BASE_URL_IDIOMA_BASE = "https://ebible.org/pibNT/"
+BASE_URL_IDIOMA_OBJETIVO = "https://ebible.org/spabes/"
 
 OUTPUT_DIR = "data/processed/"
 RAW_DIR = "data/raw/"
