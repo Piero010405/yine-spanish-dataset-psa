@@ -39,6 +39,10 @@ def clean_text(text: str) -> str:
         return ""
 
     text = repair_encoding(text)
+
+    # Eliminar contenido entre corchetes
+    text = re.sub(r"\[[^\]]*\]", "", text)
+
     text = re.sub(r"\s+", " ", text)
 
     return text.strip()

@@ -19,8 +19,14 @@ def save_csv(path, rows, fieldnames):
         None
     """
     os.makedirs(os.path.dirname(path), exist_ok=True)
+
     with open(path, mode="w", newline="", encoding="utf-8-sig") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer = csv.DictWriter(
+            f,
+            fieldnames=fieldnames,
+            delimiter=";",
+            quoting=csv.QUOTE_MINIMAL
+        )
         writer.writeheader()
         writer.writerows(rows)
 
