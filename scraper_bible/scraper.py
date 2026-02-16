@@ -13,6 +13,7 @@ from config.constants import (
 
 from config.settings import TIMEOUT
 from utils.io import safe_request, ensure_dir
+ALLOWED_DIV_CLASSES = {"p", "q", "q1", "q2"}
 
 
 def save_raw_html(html, lang, book, chapter):
@@ -45,6 +46,21 @@ def build_url(language: str, book: str, chapter: int) -> str:
     base = BASE_URL_IDIOMA_BASE if language == IDIOMA_BASE else BASE_URL_IDIOMA_OBJETIVO
     return f"{base}/{book}{chapter_str}.htm"
 
+def is_allowed_div(tag: Tag) -> bool:
+    """
+    is_allowed_div
+    
+    :param tag: Tag
+    :type tag: bs4.element.Tag
+    :return: True si el tag es un div permitido, False en caso contrario
+    :rtype: bool
+    """
+    if tag.name != "div":
+        return False
+    classes = tag.get("class", [])
+    # bs4 puede devolver class como lista
+    return any(c in ALLOWED_DIV_CLASSES for c in classes)
+
 def get_verses(url, lang, book, chapter, timeout=TIMEOUT):
     """
     Descarga y parsea los versículos de un capítulo.
@@ -65,8 +81,8 @@ def get_verses(url, lang, book, chapter, timeout=TIMEOUT):
     current_verse = None
     buffer = []
 
-    # Iteramos por todos los divs válidos (p y q)
-    valid_divs = soup.find_all("div", class_=lambda c: c in ["p", "q"])
+    # Iteramos por todos los divs válidos y sus descendientes para extraer el texto de los versículos
+    valid_divs = soup.find_all(is_allowed_div)
 
     for div in valid_divs:
         for element in div.descendants:
@@ -85,7 +101,7 @@ def get_verses(url, lang, book, chapter, timeout=TIMEOUT):
 
             elif isinstance(element, NavigableString):
                 # Solo acumular texto si estamos dentro de un versículo
-                text = element.strip()
+                text = " ".join(element.split())
                 if text and current_verse:
                     buffer.append(text)
 
