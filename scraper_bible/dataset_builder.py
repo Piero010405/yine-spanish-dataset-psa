@@ -3,6 +3,7 @@ Dataset builder that merges aligned chapters into a single CSV file.
 """
 
 import os
+import csv
 import pandas as pd
 from lib.books_dict import BOOKS
 from scraper_bible.aligner import align_chapters
@@ -39,6 +40,12 @@ def build_dataset():
 
     df = pd.DataFrame(rows)
     output_path = f"{OUTPUT_DIR}/merged/{IDIOMA_BASE}_{IDIOMA_OBJETIVO}.csv"
-    df.to_csv(output_path, index=False, encoding="utf-8-sig")
+    df.to_csv(
+        output_path,
+        index=False,
+        encoding="utf-8-sig",
+        sep=";",
+        quoting=csv.QUOTE_ALL
+    )
     print(f"✅ Dataset generado correctamente: {output_path}")
     return df
