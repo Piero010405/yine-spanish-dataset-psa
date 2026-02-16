@@ -19,7 +19,7 @@ def build_dataset():
     Returns:
         pd.DataFrame -- DataFrame containing the merged dataset
     """
-    os.makedirs(f"{OUTPUT_DIR}/merged", exist_ok=True)
+    os.makedirs(f"{OUTPUT_DIR}", exist_ok=True)
     rows = []
 
     for book, info in BOOKS.items():
@@ -39,7 +39,8 @@ def build_dataset():
         return None
 
     df = pd.DataFrame(rows)
-    output_path = f"{OUTPUT_DIR}/merged/{IDIOMA_BASE}_{IDIOMA_OBJETIVO}.csv"
+    df["source"] = "bible"
+    output_path = f"{OUTPUT_DIR}/{IDIOMA_BASE}_{IDIOMA_OBJETIVO}.csv"
     df.to_csv(
         output_path,
         index=False,
