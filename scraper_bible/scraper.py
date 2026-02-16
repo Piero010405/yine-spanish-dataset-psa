@@ -13,7 +13,7 @@ from config.constants import (
 
 from config.settings import TIMEOUT
 from utils.io import safe_request, ensure_dir
-ALLOWED_DIV_CLASSES = {"p", "q", "q1", "q2"}
+ALLOWED_DIV_CLASSES = {"p", "q", "q1", "q2", "pi", "qc", "qt"}
 
 
 def save_raw_html(html, lang, book, chapter):

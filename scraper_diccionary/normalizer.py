@@ -43,6 +43,9 @@ def clean_text(text: str) -> str:
     # Eliminar contenido entre corchetes
     text = re.sub(r"\[[^\]]*\]", "", text)
 
+    # Eliminar contenido entre parentesis
+    text = re.sub(r"\([^)]*\)", "", text)
+
     text = re.sub(r"\s+", " ", text)
 
     return text.strip()
