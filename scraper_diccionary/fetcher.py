@@ -1,6 +1,7 @@
 """
 Fetcher module for fetching HTML content.
 """
+
 import time
 import requests
 from config.settings import REQUEST_HEADERS, TIMEOUT, SLEEP_SECONDS, RETRIES
@@ -19,8 +20,14 @@ def fetch_html(url, logger):
         try:
             r = requests.get(url, headers=REQUEST_HEADERS, timeout=TIMEOUT)
             r.raise_for_status()
+
+            # 🔥 Forzar UTF-8 explícitamente
+            html = r.content.decode("utf-8", errors="strict")
+
             time.sleep(SLEEP_SECONDS)
-            return r.text
+            return html
+
         except Exception as e:
             logger.warning(f"Retry {attempt+1}/{RETRIES} failed: {e}")
+
     return None

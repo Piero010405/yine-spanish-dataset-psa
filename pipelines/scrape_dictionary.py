@@ -43,7 +43,7 @@ def main():
         fieldnames=["source", IDIOMA_BASE, IDIOMA_OBJETIVO, "page"]
     )
 
-    logger.info("Total parallel pairs: %s", len(parallel_sentences))
+    logger.info("Total parallel pairs in scraping: %s", len(parallel_sentences))
 
 if __name__ == "__main__":
     main()

@@ -20,6 +20,7 @@ def extract_parallel_examples(item, page, logger):
 
     # Obtener texto respetando saltos
     raw_text = example_block.get_text(separator="\n")
+
     lines = [clean_text(l) for l in raw_text.split("\n") if clean_text(l)]
 
     # Esperamos al menos dos líneas: YINE / ESPAÑOL
