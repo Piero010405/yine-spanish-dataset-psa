@@ -2,7 +2,7 @@
 
 Pipeline reproducible para la construcción de un corpus paralelo **Yine–Español** a partir de múltiples fuentes:
 
-* 📘 **Diccionario Virtual Yine** (ministerio de cultura del Perú)
+* 📘 **Diccionario Virtual Yine** (Ministerio de Cultura del Perú)
 * 📖 **Biblia Yine** (ebible.org)
 * 📗 **Biblia Español** (ebible.org)
 
