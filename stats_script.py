@@ -5,6 +5,12 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+# config
+plt.rcParams.update({
+    "font.size": 12,
+    "figure.figsize": (8,5),
+})
+
 # Cargar corpus final
 df = pd.read_csv(
     "data/processed/merged/full_corpus.csv",
