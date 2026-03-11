@@ -44,7 +44,7 @@ def safe_request(url, timeout):
         response = requests.get(url, timeout=timeout)
         response.raise_for_status()
         return response
-    except Exception as e:
+    except (requests.RequestException, requests.Timeout) as e:
         logging.warning("Error al obtener %s: %s", url, e)
         return None
 

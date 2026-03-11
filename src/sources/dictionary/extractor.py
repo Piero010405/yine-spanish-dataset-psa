@@ -1,44 +1,55 @@
 """
-Extractor module for scraping parallel YINE-Spanish examples.
+Extractor module for scraping parallel examples from web dictionaries.
 """
-from dictionary.normalizer import clean_text
-from config.constants import (
-    IDIOMA_BASE,
-    IDIOMA_OBJETIVO,
-    EXAMPLE_SELECTOR
-)
 
-def extract_parallel_examples(item, page):
+from src.sources.dictionary.normalizer import clean_text
+
+
+def extract_parallel_examples(
+    item,
+    page: int,
+    source_name: str,
+    language_src: str,
+    language_tgt: str,
+    example_selector: str,
+):
     """
-    Extract parallel YINE-Spanish examples from a dictionary item.
+    Extract parallel sentence pairs from a dictionary item.
+    Args:
+        item: The HTML element containing the example.
+        page (int): The page number for metadata.
+        source_name (str): The name of the source dictionary.
+        language_src (str): The source language code.
+        language_tgt (str): The target language code.
+        example_selector (str): The CSS selector to locate the example block.
+    Returns:
+        list: A list of dictionaries with parallel examples and metadata.
     """
     results = []
 
-    example_block = item.select_one(EXAMPLE_SELECTOR)
+    example_block = item.select_one(example_selector)
     if not example_block:
         return results
 
-    # Obtener texto respetando saltos
     raw_text = example_block.get_text(separator="\n")
+    lines = [clean_text(line) for line in raw_text.split("\n") if clean_text(line)]
 
-    lines = [clean_text(l) for l in raw_text.split("\n") if clean_text(l)]
-
-    # Esperamos al menos dos líneas: YINE / ESPAÑOL
     if len(lines) < 2:
         return results
 
-    yine = lines[0]
-    spa = lines[1]
+    text_src = lines[0]
+    text_tgt = lines[1]
 
-    # Filtro de seguridad adicional
-    if len(yine) < 2 or len(spa) < 2:
+    if len(text_src) < 2 or len(text_tgt) < 2:
         return results
 
-    results.append({
-        "source": "diccionario_virtual_yine",
-        IDIOMA_BASE: yine,
-        IDIOMA_OBJETIVO: spa,
-        "page": page
-    })
+    results.append(
+        {
+            "source": source_name,
+            language_src: text_src,
+            language_tgt: text_tgt,
+            "page": page,
+        }
+    )
 
     return results

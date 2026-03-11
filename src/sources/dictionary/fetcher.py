@@ -6,28 +6,27 @@ import time
 import requests
 from config.settings import REQUEST_HEADERS, TIMEOUT, SLEEP_SECONDS, RETRIES
 
+
 def fetch_html(url, logger):
     """
     Fetch HTML content from a given URL with retries.
-
     Args:
-        url (str): The URL to fetch.
-        logger (Logger): Logger for logging messages.
+        - url (str): The URL to fetch.
+        - logger: Logger for logging retry attempts and errors.
     Returns:
-        str: HTML content if successful, None otherwise.
+        - str: The HTML content if successful, None otherwise.
     """
     for attempt in range(RETRIES):
         try:
-            r = requests.get(url, headers=REQUEST_HEADERS, timeout=TIMEOUT)
-            r.raise_for_status()
+            response = requests.get(url, headers=REQUEST_HEADERS, timeout=TIMEOUT)
+            response.raise_for_status()
 
-            # 🔥 Forzar UTF-8 explícitamente
-            html = r.content.decode("utf-8", errors="strict")
+            html = response.content.decode("utf-8", errors="strict")
 
             time.sleep(SLEEP_SECONDS)
             return html
 
-        except Exception as e:
-            logger.warning(f"Retry {attempt+1}/{RETRIES} failed: {e}")
+        except (requests.RequestException, UnicodeDecodeError) as e:
+            logger.warning(f"Retry {attempt + 1}/{RETRIES} failed: {e}")
 
     return None

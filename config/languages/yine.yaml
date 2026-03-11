@@ -17,7 +17,6 @@ sources:
     type: bible_web
     base_url_source: "https://ebible.org/pibNT/"
     base_url_target: "https://ebible.org/spabes/"
-    books_scope: "new_testament"
     books:
       MAT: 28
       MRK: 16
