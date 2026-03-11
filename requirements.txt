@@ -4,3 +4,7 @@ lxml>=4.9.3
 tqdm>=4.66.1
 pandas
 matplotlib
+pyyaml
+openpyxl
+pdfplumber
+python-docx

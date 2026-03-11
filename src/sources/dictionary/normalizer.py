@@ -8,7 +8,6 @@ def repair_encoding(text: str) -> str:
     Repair multi-layer UTF-8/Latin1 mojibake safely.
     Applies iterative fixes until text stabilizes.
     """
-    previous = None
     current = text
 
     for _ in range(3):  # máximo 3 capas de reparación
@@ -20,7 +19,6 @@ def repair_encoding(text: str) -> str:
         if fixed == current:
             break
 
-        previous = current
         current = fixed
 
     return current

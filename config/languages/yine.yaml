@@ -1,0 +1,48 @@
+language_code: yine
+display_name: Yine
+target_language: spanish
+
+sources:
+  dictionary:
+    enabled: true
+    type: web_dictionary
+    base_url: "http://diccionariovirtualyine.culturacusco.gob.pe"
+    list_endpoint: "/palabra-yine-all"
+    max_page: 174
+    item_selector: "div.li-filas-data.col-md-12"
+    example_selector: "div.views-field-field-ejemplos-palabra em.field-content"
+
+  bible:
+    enabled: true
+    type: bible_web
+    base_url_source: "https://ebible.org/pibNT/"
+    base_url_target: "https://ebible.org/spabes/"
+    books_scope: "new_testament"
+    books:
+      MAT: 28
+      MRK: 16
+      LUK: 24
+      JHN: 21
+      ACT: 28
+      ROM: 16
+      1CO: 16
+      2CO: 13
+      GAL: 6
+      EPH: 6
+      PHP: 4
+      COL: 4
+      1TH: 5
+      2TH: 3
+      1TI: 6
+      2TI: 4
+      TIT: 3
+      PHM: 1
+      HEB: 13
+      JAS: 5
+      1PE: 5
+      2PE: 3
+      1JN: 5
+      2JN: 1
+      3JN: 1
+      JUD: 1
+      REV: 22

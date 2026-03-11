@@ -1,0 +1,19 @@
+language_code: wampis
+display_name: Wampis
+target_language: spanish
+
+sources:
+  document:
+    enabled: true
+    type: structured_document
+    raw_docx_path: "data/raw/wampis/document/wampis_dictionary.docx"
+    raw_pdf_path: "data/raw/wampis/document/wampis_dictionary.pdf"
+    start_page: 13
+    end_page: 268
+
+  bible:
+    enabled: false
+    type: bible_web
+    base_url_source: ""
+    base_url_target: "https://ebible.org/spabes/"
+    books_scope: "new_testament"
