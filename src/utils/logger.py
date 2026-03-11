@@ -3,7 +3,7 @@ Logger module for logging messages.
 """
 import logging
 import os
-from config.constants import LOG_DIR
+from config.settings import LOG_DIR
 
 def setup_logger(name="scraper"):
     """
