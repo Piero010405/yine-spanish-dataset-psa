@@ -5,15 +5,25 @@ target_language: spanish
 sources:
   document:
     enabled: true
-    type: structured_document
-    raw_docx_path: "data/raw/wampis/document/wampis_dictionary.docx"
-    raw_pdf_path: "data/raw/wampis/document/wampis_dictionary.pdf"
-    start_page: 13
-    end_page: 268
+    source_name: pdf_wampis_dictionary
+    type: pdf_bilingual_dictionary
+
+    pdf:
+      raw_path: "data/raw/wampis/document/wampis_dictionary.pdf"
+      start_page: 13
+      end_page: 268
+      column_gap_margin: 8
+      italic_font_markers:
+        - "Italic"
+        - "Oblique"
+
+    export:
+      save_csv: true
+      save_xlsx: true
 
   bible:
     enabled: false
     type: bible_web
     base_url_source: ""
     base_url_target: "https://ebible.org/spabes/"
-    books_scope: "new_testament"
+    books: {}
